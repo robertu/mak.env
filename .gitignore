@@ -1,0 +1,7 @@
+Makefile
+done.*
+*.zip
+*.tgz
+*.gz
+Python-*
+node-*

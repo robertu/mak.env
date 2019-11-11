@@ -1,0 +1,21 @@
+NAME=djangoprojectname
+DOMAIN=some.domain.com
+
+# REPO is a directory name upstairs (it resides in the same dir as this `makenv` repo)
+REPO=myproject
+
+APPUSER=myuser
+APPGROUP=mygroup
+APPPORT=8000
+
+# you can set the value of `geckodriver` to particular version number instead of latest one (for ex. 0.22.0)
+geckodriver=$(shell curl https://github.com/mozilla/geckodriver/releases.atom 2>/dev/null| grep -e ">v[0-9]" |head -1|sed "s/[\/\ \<\>a-z]//g")
+
+# you can set the value of `chromedriver` to particular version number instead of latest one
+chromedriver=$(shell curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+
+pythonversion=3.8.0
+
+nodeversion=10.16.3
+
+include Makefile.rules.mk
