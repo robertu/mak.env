@@ -3,6 +3,7 @@ TOPDIR=$(shell dirname ${BUILDDIR})
 LOGDIR=$(TOPDIR)/logs
 RUNDIR=$(TOPDIR)/run
 PYDIR=$(TOPDIR)/py
+CLJDIR=$(TOPDIR)/clj
 NODEDIR=$(TOPDIR)/node
 PRJDIR=${TOPDIR}/${REPO}
 REQ=${PRJDIR}/requirements.txt
@@ -12,23 +13,35 @@ PYTHON=$(PYDIR)/bin/python3
 PIP=$(PYDIR)/bin/pip3
 UNAME=$(shell uname)
 BRANCH=$(shell git branch 2>/dev/null | grep '^*' | colrm 1 2)
-PATH=$(NODEDIR)/bin:$(PYDIR)/bin:/bin:/usr/bin
+PATH=$(CLJDIR)/bin:$(NODEDIR)/bin:$(PYDIR)/bin:/bin:/usr/bin
 
 python: done.python
 
-all:   done.python done.dirs done.gecko done.chrome done.node
+all:   done.python done.dirs done.gecko done.chrome done.node done.clj
 
 clean:
 	rm -rf done.*
 
 distclean: clean
-	rm -rf Python-* node-* dist geckodriver* chromedriver*
+	rm -rf Python-* node-* dist geckodriver* chromedriver* linux-install-1.10.1.483.sh
 
 node: done.node
 
 gecko: done.gecko
 
 chrome: done.chrome
+
+clj: done.clj
+
+linux-install-1.10.1.483.sh:
+	curl -O https://download.clojure.org/install/linux-install-1.10.1.483.sh
+	chmod +x linux-install-1.10.1.483.sh
+	touch $@
+
+done.clj: linux-install-1.10.1.483.sh
+	@if [ -d ${CLJDIR} ] ; then echo "*** Directory ${CLJDIR} exists. Remove it first.";exit 1;fi
+	./linux-install-1.10.1.483.sh -p ${CLJDIR}
+	touch $@
 
 Python-${pythonversion}.tgz:
 	curl -O https://www.python.org/ftp/python/${pythonversion}/Python-${pythonversion}.tgz
