@@ -17,13 +17,13 @@ PATH=$(CLJDIR)/bin:$(NODEDIR)/bin:$(PYDIR)/bin:/bin:/usr/bin
 
 python: done.python
 
-all:   done.python done.dirs done.gecko done.chrome done.node done.clj
+all:   done.python done.dirs done.gecko done.chrome done.node done.clj done.lein done.preproc
 
 clean:
 	rm -rf done.*
 
 distclean: clean
-	rm -rf Python-* node-* dist geckodriver* chromedriver* clj-install.sh
+	rm -rf Python-* node-* dist geckodriver* chromedriver* clj-install.sh clojupyter-master
 
 node: done.node
 
@@ -31,16 +31,37 @@ gecko: done.gecko
 
 chrome: done.chrome
 
+lein: done.lein
+
+done.lein: done.clj
+	curl -O https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+	chmod 755 lein
+	mv lein ${CLJDIR}/bin
+	${CLJDIR}/bin/lein
+	touch $@
+
 clj: done.clj
+
+pyclj: done.pyclj
 
 clj-install.sh:
 	curl https://download.clojure.org/install/linux-install-1.10.1.483.sh > clj-install.sh
-	chmod +x clj-install.sh
 	touch $@
+	chmod +x clj-install.sh
 
 done.clj: clj-install.sh
 	@if [ -d ${CLJDIR} ] ; then echo "*** Directory ${CLJDIR} exists. Remove it first.";exit 1;fi
 	./clj-install.sh -p ${CLJDIR}
+	touch $@
+
+clojupyter-master: done.lein done.python
+	wget https://github.com/clojupyter/clojupyter/archive/master.zip
+	mv master.zip clojupyter-master.zip
+	unzip clojupyter-master.zip
+	touch $@
+
+done.pyclj: clojupyter-master
+	cd clojupyter-master ; make install
 	touch $@
 
 Python-${pythonversion}.tgz:
@@ -63,6 +84,7 @@ done.pip: done.python
 	touch $@
 
 done.requirements: done.pip
+	${PYDIR}/bin/pip3 install jupyterlab
 	if [ -f ${REQ} ]; then $(PIP) install -r ${REQ} ;fi
 	touch $@
 
