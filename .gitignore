@@ -7,3 +7,5 @@ done.*
 *.gz
 Python-*
 node-*
+.ipynb_checkpoints
+*.ipynb
