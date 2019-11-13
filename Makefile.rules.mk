@@ -15,7 +15,6 @@ UNAME=$(shell uname)
 BRANCH=$(shell git branch 2>/dev/null | grep '^*' | colrm 1 2)
 PATH=$(CLJDIR)/bin:$(NODEDIR)/bin:$(PYDIR)/bin:/bin:/usr/bin
 
-python: done.python
 
 all:   done.python done.dirs done.gecko done.chrome done.node done.clj done.lein done.preproc
 
@@ -24,6 +23,8 @@ clean:
 
 distclean: clean
 	rm -rf Python-* node-* dist geckodriver* chromedriver* clj-install.sh clojupyter-master
+
+python: done.python
 
 node: done.node
 
