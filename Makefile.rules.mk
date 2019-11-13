@@ -73,6 +73,7 @@ done.preproc: done.requirements
 		if [ -f $$n ] ; then mv $$n $$n.old ; fi; \
 		cat $$f \
 			| sed "s@++TOPDIR++@$(TOPDIR)@g" \
+			| sed "s@++CLJDIR++@$(CLJDIR)@g" \
 			| sed "s@++PYDIR++@$(PYDIR)@g" \
 			| sed "s@++NODEDIR++@$(NODEDIR)@g" \
 			| sed "s@++LIBDIR++@$(LIBDIR)@g" \
