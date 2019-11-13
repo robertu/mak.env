@@ -23,7 +23,7 @@ clean:
 	rm -rf done.*
 
 distclean: clean
-	rm -rf Python-* node-* dist geckodriver* chromedriver* linux-install-1.10.1.483.sh
+	rm -rf Python-* node-* dist geckodriver* chromedriver* clj-install.sh
 
 node: done.node
 
@@ -33,14 +33,14 @@ chrome: done.chrome
 
 clj: done.clj
 
-linux-install-1.10.1.483.sh:
-	curl -O https://download.clojure.org/install/linux-install-1.10.1.483.sh
-	chmod +x linux-install-1.10.1.483.sh
+clj-install.sh:
+	curl https://download.clojure.org/install/linux-install-1.10.1.483.sh > clj-install.sh
+	chmod +x clj-install.sh
 	touch $@
 
-done.clj: linux-install-1.10.1.483.sh
+done.clj: clj-install.sh
 	@if [ -d ${CLJDIR} ] ; then echo "*** Directory ${CLJDIR} exists. Remove it first.";exit 1;fi
-	./linux-install-1.10.1.483.sh -p ${CLJDIR}
+	./clj-install.sh -p ${CLJDIR}
 	touch $@
 
 Python-${pythonversion}.tgz:
