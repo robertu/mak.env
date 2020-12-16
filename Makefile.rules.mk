@@ -80,6 +80,7 @@ done.python: Python-${pythonversion}
 	touch $@
 
 done.pip: done.python
+	$(PIP) install wheel
 	$(PIP) install --upgrade pip
 	touch $@
 
