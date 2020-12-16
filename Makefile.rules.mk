@@ -1,11 +1,10 @@
 BUILDDIR=$(shell pwd)
-TOPDIR=$(shell dirname ${BUILDDIR})
 LOGDIR=$(TOPDIR)/logs
 RUNDIR=$(TOPDIR)/run
 PYDIR=$(TOPDIR)/py
 CLJDIR=$(TOPDIR)/clj
 NODEDIR=$(TOPDIR)/node
-PRJDIR=${TOPDIR}/${REPO}
+PRJDIR=${TOPDIR}/app
 REQ=${PRJDIR}/requirements.txt
 APPDIR=$(PRJDIR)/app
 LIBDIR=$(PYDIR)/lib
@@ -90,7 +89,7 @@ done.requirements: done.pip
 	touch $@
 
 done.preproc: done.requirements
-	@for f in `find .. -name "*.++"`; do  \
+	@for f in `find $(PRJDIR) -name "*.++"`; do  \
 		n=`echo $$f | sed "s/.++$$//g"`; \
 		echo "$$f => $$n"; \
 		if [ -f $$n ] ; then mv $$n $$n.old ; fi; \
@@ -103,8 +102,6 @@ done.preproc: done.requirements
 			| sed "s@++LOGDIR++@$(LOGDIR)@g" \
 			| sed "s@++RUNDIR++@$(RUNDIR)@g" \
 			| sed "s@++PRJDIR++@$(PRJDIR)@g" \
-			| sed "s@++REPO++@$(REPO)@g" \
-			| sed "s@++NAME++@$(NAME)@g" \
 			| sed "s@++APPUSER++@$(APPUSER)@g" \
 			| sed "s@++APPGROUP++@$(APPGROUP)@g" \
 			| sed "s@++DOMAIN++@$(DOMAIN)@g" \

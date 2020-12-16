@@ -1,8 +1,5 @@
-NAME=djangoprojectname
+TOPDIR=/home/user/projects/oproject1
 DOMAIN=some.domain.com
-
-# REPO is a directory name upstairs (it resides in the same dir as this `makenv` repo)
-REPO=myproject
 
 APPUSER=myuser
 APPGROUP=mygroup
@@ -14,8 +11,8 @@ geckodriver=$(shell curl https://github.com/mozilla/geckodriver/releases.atom 2>
 # you can set the value of `chromedriver` to particular version number instead of latest one
 chromedriver=$(shell curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
 
-pythonversion=3.8.0
+pythonversion=3.9.0
 
-nodeversion=10.16.3
+nodeversion=14.15.1
 
 include Makefile.rules.mk
