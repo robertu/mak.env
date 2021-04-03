@@ -1,8 +1,8 @@
-TOPDIR=/home/user/projects/oproject1
-DOMAIN=some.domain.com
+TOPDIR=/home/user/app
+DOMAIN=app.domain
 
-APPUSER=myuser
-APPGROUP=mygroup
+APPUSER=user
+APPGROUP=user
 APPPORT=8000
 
 # you can set the value of `geckodriver` to particular version number instead of latest one (for ex. 0.22.0)
@@ -11,7 +11,7 @@ geckodriver=$(shell curl https://github.com/mozilla/geckodriver/releases.atom 2>
 # you can set the value of `chromedriver` to particular version number instead of latest one
 chromedriver=$(shell curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
 
-pythonversion=3.9.2
+pythonversion=3.9.3
 
 nodeversion=14.15.1
 

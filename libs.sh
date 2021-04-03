@@ -1,5 +1,7 @@
 apt-get install -y \
 build-essential \
+python3-certbot-nginx nginx certbot \
+openjdk-11-jre-headless \
 libbz2-dev \
 libfreetype6 \
 libfreetype6-dev \
@@ -15,7 +17,7 @@ libz-dev \
 zlib1g zlib1g-dev \
 tcl-dev tcllib tk-dev tklib \
 libpcre3 libpcre3-dev \
-curl \
+curl unzip \
 libaio-dev libaio1 \
 supervisor git mc vim neovim \
 libtiff-tools \
