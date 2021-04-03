@@ -1,5 +1,5 @@
 ENVDIR=$(shell pwd)
-TOPDIR=$(dirname ${ENVDIR})
+TOPDIR=$(shell dirname ${ENVDIR})
 DOMAIN=app.domain
 
 APPUSER=user
