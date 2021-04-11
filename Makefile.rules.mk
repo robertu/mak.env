@@ -90,7 +90,7 @@ done.requirements: done.pip
 	touch $@
 
 done.preproc: done.requirements
-	@for f in `find $(PRJDIR) -name "*.++"`; do  \
+	@for f in `find $(TOPDIR) -name "*.++"`; do  \
 		n=`echo $$f | sed "s/.++$$//g"`; \
 		echo "$$f => $$n"; \
 		if [ -f $$n ] ; then mv $$n $$n.old ; fi; \

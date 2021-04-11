@@ -12,8 +12,8 @@ geckodriver=$(shell curl https://github.com/mozilla/geckodriver/releases.atom 2>
 # you can set the value of `chromedriver` to particular version number instead of latest one
 chromedriver=$(shell curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
 
-pythonversion=3.9.3
+pythonversion=3.9.4
 
-nodeversion=14.15.1
+nodeversion=15.14.0
 
 include Makefile.rules.mk
